@@ -1,8 +1,8 @@
 extends CharacterBody2D
 
 
-const SPEED = 450.0
-const JUMP_VELOCITY = -600.0
+const SPEED = 150.0
+const JUMP_VELOCITY = -500.0
 @onready var anim: AnimatedSprite2D = $AnimatedSprite2D
 
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
@@ -44,3 +44,11 @@ func update_animation():
 	elif velocity.y > 0:
 		anim.play("fall")
 		
+func on_death():
+	
+	self.queue_free()
+
+
+func _on_pickup_area_entered(area: Area2D) -> void:
+	if area.has_method("on_pickup"):
+		area.on_pickup(self)

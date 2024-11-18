@@ -1,0 +1,46 @@
+[gd_scene load_steps=3 format=3 uid="uid://xxikigd1f40"]
+
+[ext_resource type="Script" path="res://Menus/main_menu.gd" id="1_aole0"]
+[ext_resource type="Texture2D" uid="uid://beogqyw6k5f28" path="res://Background/Purple.png" id="2_urn2f"]
+
+[node name="MainMenu" type="CanvasLayer"]
+script = ExtResource("1_aole0")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -54.0
+offset_top = -33.0
+offset_right = 54.0
+offset_bottom = 33.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="Start game" type="Button" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Начать игру"
+
+[node name="Exit" type="Button" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Выход
+"
+
+[node name="ParallaxBackground" type="ParallaxBackground" parent="."]
+
+[node name="StillParallaxLayer" type="ParallaxLayer" parent="ParallaxBackground"]
+
+[node name="Purple" type="Sprite2D" parent="ParallaxBackground/StillParallaxLayer"]
+position = Vector2(358, 342)
+scale = Vector2(11.2453, 10.6207)
+texture = ExtResource("2_urn2f")
+
+[connection signal="pressed" from="MarginContainer/VBoxContainer/Start game" to="." method="_on_start_game_pressed"]
+[connection signal="resized" from="MarginContainer/VBoxContainer/Start game" to="." method="_on_start_game_resized"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/Exit" to="." method="_on_exit_pressed"]

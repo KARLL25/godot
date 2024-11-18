@@ -1,4 +1,4 @@
-[gd_scene load_steps=54 format=3 uid="uid://clgmn0vj2s7mh"]
+[gd_scene load_steps=55 format=3 uid="uid://clgmn0vj2s7mh"]
 
 [ext_resource type="Script" path="res://Player/player.gd" id="1_5jbtp"]
 [ext_resource type="Texture2D" uid="uid://bi2nc7mv4lolh" path="res://Free/Main Characters/Pink Man/Double Jump (32x32).png" id="2_0mk8u"]
@@ -10,8 +10,7 @@
 [ext_resource type="Texture2D" uid="uid://c5wepmq4rg2bu" path="res://Free/Main Characters/Pink Man/Wall Jump (32x32).png" id="8_n2llg"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_nhuiy"]
-radius = 12.0
-height = 26.0
+height = 22.0
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_t5ana"]
 atlas = ExtResource("2_0mk8u")
@@ -352,6 +351,9 @@ animations = [{
 "speed": 20.0
 }]
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_qsxrp"]
+radius = 16.1245
+
 [node name="Player" type="CharacterBody2D"]
 script = ExtResource("1_5jbtp")
 
@@ -363,3 +365,16 @@ shape = SubResource("CapsuleShape2D_nhuiy")
 position = Vector2(0, -1)
 sprite_frames = SubResource("SpriteFrames_ooxjn")
 animation = &"idle"
+
+[node name="Camera2D" type="Camera2D" parent="."]
+zoom = Vector2(1.5, 1.5)
+position_smoothing_enabled = true
+rotation_smoothing_enabled = true
+
+[node name="PickupArea" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PickupArea"]
+position = Vector2(0, 1)
+shape = SubResource("CircleShape2D_qsxrp")
+
+[connection signal="area_entered" from="PickupArea" to="." method="_on_pickup_area_entered"]
